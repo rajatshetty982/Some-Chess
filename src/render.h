@@ -30,7 +30,7 @@ SDL_Renderer* init_renderer(SDL_Window* window);
 
 void load_textures(SDL_Renderer* renderer, Gamestate* state);
 
-
+void update_game(Gamestate* state);
 
 
 

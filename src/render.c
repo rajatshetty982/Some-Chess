@@ -61,3 +61,10 @@ void render_game(SDL_Renderer* renderer, Gamestate* state){
 
 	return;
 }
+
+void update_game(Gamestate* state){
+	// Update game logic here
+	// This function can be used to handle game state updates, such as piece movements, checks, etc.
+	
+	return;
+}

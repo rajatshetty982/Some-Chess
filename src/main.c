@@ -22,7 +22,7 @@ int main() {
         SDL_Delay(16); // ~60 FPS
     }
 
-    cleanup(window, renderer);
+    cleanup_sdl(window, renderer);
 
     return 0;
 }
