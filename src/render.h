@@ -24,14 +24,15 @@
 #define LIGHT_COLOR 0x769656
 
 
+SDL_Window* init_window();
+
 void render_game(SDL_Renderer* renderer, Gamestate* state);
 
 SDL_Renderer* init_renderer(SDL_Window* window);
 
 void load_textures(SDL_Renderer* renderer, Gamestate* state);
 
-void update_game(Gamestate* state);
-
+void cleanup_sdl(SDL_Window* window, SDL_Renderer* renderer);
 
 
 

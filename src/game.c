@@ -26,33 +26,25 @@ Gamestate init_game(){
     // return all the position and data
     Gamestate gamestate;
 
+    init_fen(&gamestate);
+
+
     return gamestate;
 }
 
-SDL_Window* init_window(){
-
-    SDL_Window* window = NULL;
-
-    if(SDL_Init(SDL_INIT_VIDEO) == -1){
-        printf("sdl init failed, Error -> %s", SDL_GetError());
-        exit(-1);
-    }
-    atexit(SDL_Quit);
-
-
-    window = SDL_CreateWindow("Chess By Rajat", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    if ( window == NULL ) {
-        fprintf(stderr, "Couldn't set 640x480x8 video mode: %s\n",
-                SDL_GetError());
-        exit(1);
-    }
-
-    return window;
+void update_game(Gamestate* state){
+	// Update game logic here
+	// This function can be used to handle game state updates, such as piece movements, checks, etc.
+	
+	return;
 }
 
+void init_fen(Gamestate* state) {
+    // Initialize the game state with the starting position in FEN format
+    // This is a placeholder; actual implementation will depend on your game logic
+    // For example, you might set up the board pieces based on the FEN string
 
-void cleanup_sdl(SDL_Window* window, SDL_Renderer* renderer) {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    // Example: state->fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    // This is just a placeholder, actual implementation will vary
+    state->fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 }
