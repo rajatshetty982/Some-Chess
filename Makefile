@@ -1,4 +1,4 @@
-OBJS = src/main.c src/game.c src/move.c src/render.c src/board.c src/utils.c
+OBJS = src/main.c src/game.c src/move.c src/render.c src/pieces.c src/utils.c
 
 CC = gcc
 

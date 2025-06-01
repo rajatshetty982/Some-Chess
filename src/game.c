@@ -29,6 +29,8 @@ Gamestate init_game(){
     init_fen(&gamestate);
 
 
+    printf("Game initialized with FEN: %s\n", gamestate.fen);
+
     return gamestate;
 }
 
@@ -40,11 +42,8 @@ void update_game(Gamestate* state){
 }
 
 void init_fen(Gamestate* state) {
-    // Initialize the game state with the starting position in FEN format
-    // This is a placeholder; actual implementation will depend on your game logic
-    // For example, you might set up the board pieces based on the FEN string
 
-    // Example: state->fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    // This is just a placeholder, actual implementation will vary
     state->fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+    state->moves = NULL; // Initialize moves array to NULL
 }

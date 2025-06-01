@@ -20,14 +20,6 @@ SDL_Renderer* init_renderer(SDL_Window* window){
     return renderer;
 }
 
-void load_textures(SDL_Renderer* renderer, Gamestate* gamestate){
-
-	// is this function for loading the pieces and stuff?
-
-    return;
-}
-
-
 void render_game(SDL_Renderer* renderer, Gamestate* state){
 	
 	

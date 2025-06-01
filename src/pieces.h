@@ -1,5 +1,10 @@
-#ifndef BOARD_H
-#define BOARD_H
+#ifndef PIECES_H
+#define PIECES_H
+
+#include "game.h"
+// #include "render.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
 
 typedef enum {
 	NONE = 0,
@@ -25,9 +30,8 @@ typedef enum {
 	BLACK_KING = KING | BLACK
 } Pieces;
 
-typedef enum {
-	WHITE_SIDE = 0,
-	BLACK_SIDE = 1
-} Side;
+int init_pieces( Gamestate* state);
+
+void load_textures(SDL_Renderer* renderer, Gamestate* state);
 
 #endif

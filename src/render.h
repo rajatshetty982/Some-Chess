@@ -30,7 +30,6 @@ void render_game(SDL_Renderer* renderer, Gamestate* state);
 
 SDL_Renderer* init_renderer(SDL_Window* window);
 
-void load_textures(SDL_Renderer* renderer, Gamestate* state);
 
 void cleanup_sdl(SDL_Window* window, SDL_Renderer* renderer);
 

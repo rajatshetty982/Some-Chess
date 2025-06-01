@@ -4,18 +4,26 @@
 #include "game.h"
 #include "move.h"
 #include "render.h"
+#include "pieces.h"
 
-int main() {
+int main()
+{
 
     init_sdl();
     Gamestate state = init_game();
-    SDL_Window* window = init_window();
-    SDL_Renderer* renderer = init_renderer(window);
-    load_textures(renderer, &state);
+    SDL_Window *window = init_window();
+    SDL_Renderer *renderer = init_renderer(window);
+    int error = init_pieces(&state);
+    if (error < 0)
+    {
+        cleanup_sdl(window, renderer);
+        return -1;
+    }
 
     int running = 1;
 
-    while (running) {
+    while (running)
+    {
         handle_input(&state, &running);
         update_game(&state);
         render_game(renderer, &state);
