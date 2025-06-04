@@ -13,20 +13,18 @@ int main()
     Gamestate state = init_game();
     SDL_Window *window = init_window();
     SDL_Renderer *renderer = init_renderer(window);
-    int error = init_pieces(&state);
-    if (error < 0)
-    {
-        cleanup_sdl(window, renderer);
-        return -1;
-    }
+    PieceTextures textures;
+    load_piece_textures(renderer, &textures);
 
     int running = 1;
 
     while (running)
     {
+
+        render_game(renderer, state, &textures);
+       
         handle_input(&state, &running);
         update_game(&state);
-        render_game(renderer, &state);
         SDL_Delay(16); // ~60 FPS
     }
 

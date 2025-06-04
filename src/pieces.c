@@ -1,44 +1,35 @@
 
-// #include <SDL2/SDL.h>
-// #include <SDL2/SDL_render.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_image.h>
 // #include <stdio.h>
 #include "pieces.h"
 #include "game.h"
-
-// init the pieces
-int init_pieces(Gamestate* state) {
-	// This function initializes the pieces and their textures.
-	// It can load images, set up piece data, etc.
+#include "render.h"
 
 
-	// get the fen string and put match it with png of pieces
-	if (state == NULL || state->fen == NULL) {
-		printf("Invalid game state or FEN string.\n");
-		return -1;
-	}
+void load_piece_textures(SDL_Renderer* renderer, PieceTextures* textures) {
+	const char* pieces_file_prefix = "./wad/pieces/";
+    textures->white[0] = IMG_LoadTexture(renderer,give_file_path_with_prefix(pieces_file_prefix, "wP")); // Pawn
 
-	int error = fen_parser(state->fen);
-	if (error < 0) {
-		printf("Error parsing FEN string: %d\n", error);
-		return -1;
-	}
+    textures->white[1] = IMG_LoadTexture(renderer,give_file_path_with_prefix(pieces_file_prefix, "wN")); // Knight 
+    textures->white[2] = IMG_LoadTexture(renderer, give_file_path_with_prefix(pieces_file_prefix, "wB")); // Bishop 
+    textures->white[3] = IMG_LoadTexture(renderer, give_file_path_with_prefix(pieces_file_prefix, "wR")); // Rook 
+    textures->white[4] = IMG_LoadTexture(renderer, give_file_path_with_prefix(pieces_file_prefix, "wQ")); // Queen 
+    textures->white[5] = IMG_LoadTexture(renderer, give_file_path_with_prefix(pieces_file_prefix, "wK")); // King 
 
-	
-	printf("Pieces initialized.\n");
-	
-	return 0;
+    textures->black[0] = IMG_LoadTexture(renderer, give_file_path_with_prefix(pieces_file_prefix, "bP"));
+    textures->black[1] = IMG_LoadTexture(renderer,  give_file_path_with_prefix(pieces_file_prefix, "bN"));
+    textures->black[2] = IMG_LoadTexture(renderer, give_file_path_with_prefix(pieces_file_prefix, "bB"));
+    textures->black[3] = IMG_LoadTexture(renderer,  give_file_path_with_prefix(pieces_file_prefix, "bR"));
+    textures->black[4] = IMG_LoadTexture(renderer,  give_file_path_with_prefix(pieces_file_prefix, "bQ"));
+    textures->black[5] = IMG_LoadTexture(renderer,  give_file_path_with_prefix(pieces_file_prefix, "bK"));
+  
 }
 
 
-int fen_parser(const char* fen) {
-	// This function parses the FEN string and initializes the pieces accordingly.
-
-	if (fen == NULL) {
-		return -1; // Error: FEN string is NULL
-	}
-
-	
-
-
-	return 0; 
+char* give_file_path_with_prefix(const char* prefix, const char piece_char[]) {
+	static char file_path[256];
+	snprintf(file_path, sizeof(file_path), "%s%s.png", prefix, piece_char);
+	return file_path;
 }

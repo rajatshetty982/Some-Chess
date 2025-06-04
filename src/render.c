@@ -20,7 +20,7 @@ SDL_Renderer* init_renderer(SDL_Window* window){
     return renderer;
 }
 
-void render_game(SDL_Renderer* renderer, Gamestate* state){
+void render_game(SDL_Renderer* renderer, Gamestate state, PieceTextures *textures){
 	
 	
 	// const int TILE_SIZE = SCREEN_HEIGHT / 8;
@@ -45,6 +45,7 @@ void render_game(SDL_Renderer* renderer, Gamestate* state){
 			SDL_RenderFillRect(renderer, &tile);
 		}
 	}
+    render_pieces(renderer, textures, state.fen);
 
 	// Render pieces here using state data
 	// ...
@@ -82,4 +83,46 @@ void cleanup_sdl(SDL_Window* window, SDL_Renderer* renderer) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+}
+
+
+
+
+
+
+void render_pieces(SDL_Renderer* renderer, PieceTextures* textures, const char* fen) {
+
+    int rank = 0, file = 0;
+    for (int i = 0; fen[i] && fen[i] != ' '; i++) {
+        char c = fen[i];
+        if (c == '/') {
+            rank++;
+            file = 0;
+        } else if (c >= '1' && c <= '8') {
+            file += c - '0';
+        } else {
+            SDL_Texture* tex = NULL;
+            int type = -1;
+            if (c == 'P' || c == 'p') type = 0;
+            else if (c == 'N' || c == 'n') type = 1;
+            else if (c == 'B' || c == 'b') type = 2;
+            else if (c == 'R' || c == 'r') type = 3;
+            else if (c == 'Q' || c == 'q') type = 4;
+            else if (c == 'K' || c == 'k') type = 5;
+
+            if (type != -1) {
+                if (c >= 'A' && c <= 'Z')
+                    tex = textures->white[type];
+                else
+                    tex = textures->black[type];
+
+                SDL_Rect dest = { file * TILE_SIZE, rank * TILE_SIZE, TILE_SIZE, TILE_SIZE };
+                SDL_RenderCopy(renderer, tex, NULL, &dest);
+
+            }
+            file++;
+        }
+    }
+
+    // SDL_RenderPresent(renderer);
 }
