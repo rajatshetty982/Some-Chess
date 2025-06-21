@@ -26,13 +26,15 @@
 
 SDL_Window* init_window();
 
-void render_game(SDL_Renderer* renderer, Gamestate state, PieceTextures *textures);
+void render_game(SDL_Renderer* renderer, Gamestate* state, PieceTextures *textures);
 
 SDL_Renderer* init_renderer(SDL_Window* window);
 
 
 void cleanup_sdl(SDL_Window* window, SDL_Renderer* renderer);
 
+
+int sync_current_piece_positions(Gamestate* state);
 
 typedef enum {
 	NONE = 0,

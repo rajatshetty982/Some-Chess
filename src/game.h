@@ -4,15 +4,32 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
 
+
 typedef int move_t[]; // Array of integers representing a move, e.g., needs a buffer size
 // This should not be an int, it should maybe should the algebraic notation of the move, or a struct with more information
-
 
 
 typedef enum {
 	WHITE_SIDE = 0,
 	BLACK_SIDE = 1
 } Side;
+
+typedef struct piece_postions_map_t{
+
+}piece_postions_map_t;
+
+typedef struct {
+	char* fen; // FEN string representing the current game state
+	move_t* moves; // Array of moves made in the game
+	int move_count; // Number of moves made. Can be used to state the maximum number of moves
+	int current_move; // Index of the current move being played
+	Side turn; // Current player's turn
+	// PieceTextures textures;
+	int pos[8][8];
+	piece_postions_map_t piece_postions_map;
+}Gamestate;
+
+
 
 
 #define PIECE_TYPE_COUNT 6 // 6 types of pieces for each color
@@ -23,17 +40,13 @@ typedef struct {
 } PieceTextures;
 
 
+// int BOARD[8][8];
 
 
-typedef struct {
-	char* fen; // FEN string representing the current game state
-	move_t* moves; // Array of moves made in the game
-	int move_count; // Number of moves made. Can be used to state the maximum number of moves
-	int current_move; // Index of the current move being played
-	Side turn; // Current player's turn
-	// PieceTextures textures;
 
-}Gamestate;
+void load_fen_to_piece_positions_map(Gamestate* state);
+
+
 
 Gamestate init_game();
 SDL_Window* init_window();

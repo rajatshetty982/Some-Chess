@@ -33,3 +33,5 @@ char* give_file_path_with_prefix(const char* prefix, const char piece_char[]) {
 	snprintf(file_path, sizeof(file_path), "%s%s.png", prefix, piece_char);
 	return file_path;
 }
+
+

@@ -21,7 +21,7 @@ int main()
     while (running)
     {
 
-        render_game(renderer, state, &textures);
+        render_game(renderer, &state, &textures);
        
         handle_input(&state, &running);
         update_game(&state);
