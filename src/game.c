@@ -37,6 +37,7 @@ Gamestate init_game(){
 void update_game(Gamestate* state){
 	// Update game logic here
 	// This function can be used to handle game state updates, such as piece movements, checks, etc.
+
 	
 	return;
 }
@@ -46,4 +47,13 @@ void init_fen(Gamestate* state) {
     state->fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
     state->moves = NULL; // Initialize moves array to NULL
+}
+
+
+void load_fen_to_piece_positions_map(Gamestate* state ){
+    char* fen = state->fen;
+
+    
+
+
 }

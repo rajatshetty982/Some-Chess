@@ -5,6 +5,7 @@
 // #include "render.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
+#include "utils.h"
 
 // #define PIECE_TYPE_COUNT 6 // 6 types of pieces for each color
 // typedef struct {

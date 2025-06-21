@@ -7,10 +7,13 @@
 
 void handle_input(Gamestate* state, int* running){
 
+    sync_current_piece_positions(state);// I believe this should be somewhere else
+
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT) {
+			printf("Qutting the app!");
 			*running = 0;
 
 		} else if (event.type == SDL_KEYDOWN) {
@@ -22,67 +25,8 @@ void handle_input(Gamestate* state, int* running){
 
 		}
 	}
+
 }
-
-void handle_key_event(Gamestate* state, SDL_Keysym* keysym, int* running) {
-
-	// int even = 0; // Example variable to toggle some behavior
-
-	// if (keysym->sym == SDLK_RETURN) {
-	// 	// Handle Enter key press
-	// 	even = !even; // Toggle even state
-	// }
-
-	// if (keysym->sym == SDLK_ESCAPE) {
-	// 	// Handle Escape key press
-	// 	*running = 0; // Exit the game
-	// }
-
-	// if (event.key.keysym.sym > 96 && event.key.keysym.sym < 105) {
-
-	// 	if (even)
-
-
-	// 		switch (event.key.keysym.sym) {
-	// 			case SDLK_ESCAPE:
-	// 				// want a modal dialog to confirm exit
-	// 				// give me the code for that, copilot
-	// 				*running = 0; // Exit the game
-	// 				break;
-
-	// 			case SDL_KeyCode
-	// 				// Handle other key events here
-	// 				default:
-	// 				break;
-	// 		}
-
-	// }
-
-	// void handle_mouse_event(Gamestate* state, SDL_MouseButtonEvent* event, int* running) {
-
-	// 	if (event->button == SDL_BUTTON_RIGHT) {
-	// 		// Handle right mouse button click
-	// 		return;
-	// 	}
-
-	// 	if (event->button == SDL_BUTTON_MIDDLE) {
-	// 		// Handle middle mouse button click
-	// 		return;
-	// 	}
-	// 	switch (event.button.button) {
-	// 		case SDL_BUTTON_LEFT:
-	// 			// Handle left mouse button click
-	// 			break;
-	// 		case SDL_BUTTON_RIGHT:
-	// 			// Handle right mouse button click
-	// 			break;
-	// 		default:
-	// 			break;
-	// 	}
-	// }
-return;
-}
-
 
 void handle_mouse_event(Gamestate* state, SDL_MouseButtonEvent* event, int* running) {
 
@@ -103,6 +47,7 @@ void handle_mouse_event(Gamestate* state, SDL_MouseButtonEvent* event, int* runn
 		int file = x / TILE_SIZE;
 		int rank = y / TILE_SIZE;
 		printf("File: %d,  Rank: %d\n", file, rank);
+		
 		break;
 	case SDL_BUTTON_RIGHT:
 		// Handle right mouse button click
@@ -116,4 +61,26 @@ void handle_mouse_event(Gamestate* state, SDL_MouseButtonEvent* event, int* runn
 	default:
 		break;
 	}
+	
+
+	// once we get the file and rank, we need to know what piece is there
+	// and then we need to know if the piece can be moved to the clicked position
+	// and then we need to update the game state accordingly
 }
+
+void print_board(int pos[8][8]) {
+    printf("Current board:\n");
+    for (int rank = 0; rank < 8; rank++) {
+        for (int file = 0; file < 8; file++) {
+            printf("%2d \t", pos[rank][file]);
+        }
+        printf("\n");
+    }
+}
+
+void handle_key_event(Gamestate* state, SDL_Event* event, int* running) {
+    printf("Key events are not yet supported\n\n");
+    print_board(state->pos);
+    return;
+}
+
