@@ -23,7 +23,7 @@ void init_sdl() {
 }
 
 Gamestate init_game(){
-    // return all the position and data
+
     Gamestate gamestate;
 
     init_fen(&gamestate);
