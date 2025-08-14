@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"*.hex": "code-text-binary",
-		"sdl_events.h": "c",
-		"sdl_video.h": "c",
-		"render.h": "c",
-		"game.h": "c"
-	}
-}

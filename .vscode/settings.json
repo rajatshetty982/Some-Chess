@@ -1,6 +1,0 @@
-{
-	"files.associations": {
-		"*.hex": "code-text-binary",
-		"sdl_image.h": "c"
-	}
-}
