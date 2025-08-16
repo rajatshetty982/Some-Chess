@@ -121,9 +121,10 @@ SDL_Window* init_window(){
 	return window;
 }
 
-
 void cleanup_sdl(SDL_Window* window, SDL_Renderer* renderer) {
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+    if (renderer) SDL_DestroyRenderer(renderer);
+    if (window) SDL_DestroyWindow(window);
+
+    IMG_Quit();  
+    SDL_Quit(); 
 }

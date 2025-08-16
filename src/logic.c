@@ -1,32 +1,30 @@
 #include "../include/logic.h"
-#include "../include/game.h"
 
-
-
-int is_valid_first_click(Gamestate *state, int file, int rank) {
-
-	int piece = state->board[rank][file];
-	if (piece == NONE)
-	{
-		return 0;
-	}	
-		// mask first 3 bits and see which bit is 1 in 3rd and 4th place
-		int piece_colour = piece & (WHITE | BLACK);
-
-		if (piece_colour == state->turn) { // 
-			return 1;
-		}
-		return 0;
+void generate_legal_moves(Gamestate *state)
+{
 }
 
-void generate_legal_moves(Gamestate *state){
-
+int is_legal_move(Gamestate *state, int clicked_square_index)
+{
 }
 
-int is_legal_move(Gamestate *state, int clicked_square_index) {
+void make_move(Gamestate *state, int current_square, int new_square)
+{
+	// if king moved turn castle rights flag to false
+	// if en passant, set or clearn the square
+	// increment halfmove clock
+	// increment fullmove number if this was black's moved
+	// check if move was castle and handle it
+	// if en passant move it that way
+	// if pawn and square is +7 rank from start -> promote (show option on a window)
 
-}
+	// state->board[]
+	int curr_rank = new_square / 8;
+	int curr_file = new_square % 8;
 
-void make_move(Gamestate *state, int current_square, int new_square) {
-
+	int prev_rank = current_square / 8;
+	int prev_file = current_square % 8;
+	state->board[curr_rank][curr_file] = state->board[prev_rank][prev_file];
+	state->board[prev_rank][prev_file] = 0;
+	state->turn = state->turn ^ (WHITE | BLACK);
 }

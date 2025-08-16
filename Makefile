@@ -1,6 +1,6 @@
 CC = gcc
 
-OBJS = src/main.c src/game.c src/move.c src/render.c src/pieces.c src/utils.c src/board.c
+OBJS = src/main.c src/game.c src/move.c src/render.c src/pieces.c src/utils.c src/board.c src/logic.c
 
 TARGET = build/chess-ui
 

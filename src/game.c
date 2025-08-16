@@ -11,17 +11,18 @@
 
 
 void init_sdl() {
-    if(SDL_Init(SDL_INIT_VIDEO) == -1){
-        printf("sdl init failed, Error -> %s", SDL_GetError());
-        exit(-1);
-    }
-    atexit(SDL_Quit);
-
-    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
-        printf("SDL_image init failed: %s\n", IMG_GetError());
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        fprintf(stderr, "SDL_Init failed: %s\n", SDL_GetError());
         exit(1);
     }
-    atexit(IMG_Quit);
+
+    // Initialize SDL_image with PNG support
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags)) {
+        fprintf(stderr, "SDL_image init failed: %s\n", IMG_GetError());
+        SDL_Quit();
+        exit(1);
+    }
 }
 
 void init_game(Gamestate *state){

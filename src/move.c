@@ -5,9 +5,10 @@
 #include "../include/render.h"
 #include "../include/move.h"
 #include "../include/logic.h"
-
 #include "../include/constants.h"
 #include "../include/models.h"
+#include "../include/utils.h"
+
 
 
 
@@ -20,6 +21,7 @@ void handle_input(Gamestate* state, int* running){
 		if (event.type == SDL_QUIT) {
 			printf("Qutting the app!");
 			*running = 0;
+			
 
 		} else if (event.type == SDL_KEYDOWN) {
 			handle_key_event(state, &event.key, running);
