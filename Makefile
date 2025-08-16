@@ -1,12 +1,20 @@
-OBJS = src/main.c src/game.c src/move.c src/render.c src/pieces.c src/utils.c
-
 CC = gcc
 
-COMPILER_FLAGS = -w
+OBJS = src/main.c src/game.c src/move.c src/render.c src/pieces.c src/utils.c src/board.c
 
-LINKER_FLAGS = -lSDL2 -lSDL2_image
+TARGET = build/chess-ui
 
-OBJ_NAME = build/chess
+CFLAGS = -w
 
-all : $(OBJS)
-	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+LDFLAGS = -lSDL2 -lSDL2_image
+
+$(TARGET) : $(OBJS)
+	@mkdir -p build
+	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(TARGET)
+	./$(TARGET)
+
+
+# Rule to clean up generated files
+clean:
+	rm -f $(TARGET)
+	rmdir build 2>/dev/null || true

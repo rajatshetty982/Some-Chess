@@ -1,34 +1,45 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
-#include "game.h"
-#include "move.h"
-#include "render.h"
-#include "pieces.h"
+#include <stdlib.h>
+
+#include "../include/game.h"
+#include "../include/move.h"
+#include "../include/render.h"
+#include "../include/pieces.h"
+#include "../include/board.h"
+#include "../include/constants.h"
+#include "../include/models.h"
 
 int main()
 {
-
     init_sdl();
-    Gamestate state = init_game();
     SDL_Window *window = init_window();
     SDL_Renderer *renderer = init_renderer(window);
-    PieceTextures textures;
-    load_piece_textures(renderer, &textures);
+
+    Gamestate *state = calloc(1, sizeof(Gamestate));
+    init_game(state);
+    PieceTextures *textures = malloc(sizeof(PieceTextures));
+    if (!textures){
+        printf("Fatal: malloc failed. aborting game\n");
+        exit(-1);
+    }
+    load_piece_textures(renderer, textures);
+    init_piece_positions(state);
+
 
     int running = 1;
-
     while (running)
     {
-
-        render_game(renderer, &state, &textures);
-       
-        handle_input(&state, &running);
-        update_game(&state);
-        SDL_Delay(16); // ~60 FPS
+        handle_input(state, &running);
+        // update_game(state);
+        render_game(renderer, state, textures);
+        SDL_Delay(16); // ~60 FPS NOTE: use SDL_GetPerformanceCounter() her instead
     }
-
+    free_piece_textures(textures);
     cleanup_sdl(window, renderer);
+    free(textures);
+    free(state);
 
     return 0;
 }

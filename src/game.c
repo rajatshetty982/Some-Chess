@@ -4,8 +4,10 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
 #include <stdio.h>
-#include "game.h"
-#include "render.h"
+#include "../include/game.h"
+#include "../include/pieces.h"
+#include "../include/constants.h"
+#include "../include/models.h"
 
 
 void init_sdl() {
@@ -22,38 +24,34 @@ void init_sdl() {
     atexit(IMG_Quit);
 }
 
-Gamestate init_game(){
+void init_game(Gamestate *state){
 
-    Gamestate gamestate;
+    init_fen(state);
 
-    init_fen(&gamestate);
+    state->turn = WHITE;
 
+    printf("Game initialized with FEN: %s\n", state->fen);
 
-    printf("Game initialized with FEN: %s\n", gamestate.fen);
-
-    return gamestate;
+    return;
 }
 
 void update_game(Gamestate* state){
-	// Update game logic here
-	// This function can be used to handle game state updates, such as piece movements, checks, etc.
-
+    // checks the fen and loads the 
+    // will rewrite the fen string 
 	
 	return;
 }
 
-void init_fen(Gamestate* state) {
+void init_fen(Gamestate *state) {
 
     state->fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    // state->fen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 1 2";
 
-    state->moves = NULL; // Initialize moves array to NULL
+    // state->moves = NULL; // Initialize moves array to NULL
 }
 
 
-void load_fen_to_piece_positions_map(Gamestate* state ){
-    char* fen = state->fen;
+// void load_fen_to_piece_positions_map(Gamestate* state ){
+//     char* fen = state->fen;
+// }
 
-    
-
-
-}
