@@ -30,6 +30,7 @@ void init_game(Gamestate *state){
     init_fen(state);
 
     state->turn = WHITE;
+    state->selected_square = -1;
 
     printf("Game initialized with FEN: %s\n", state->fen);
 
